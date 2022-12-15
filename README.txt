@@ -25,7 +25,7 @@ RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier, SupportV
 
 >Clear data by removing outliers
 
->>for more information visit: http://genesiscube.ir/index-6.html
+>>for more information visit: http://genesiscube.ir/index.php/autooptimizer/
 
 
 
