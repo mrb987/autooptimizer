@@ -4,6 +4,7 @@ from sklearn import metrics
 import numpy as np
 
 def kmeans(x):
+    x = np.array(x)
     calinski_harabasz_score = np.array([])
     silhouette_score = np.array([])
     for i in range(2,12):
@@ -16,6 +17,7 @@ def kmeans(x):
     return KMeans(n_clusters = best_score + 2)
 
 def meanshift(x):
+    x = np.array(x)
     bandwidth = estimate_bandwidth(x, quantile = 0.3, random_state = 2)
     model = MeanShift(bandwidth=bandwidth).fit(x)
     label = model.labels_
@@ -23,6 +25,7 @@ def meanshift(x):
     return model
 
 def dbscan(x):
+    x = np.array(x)
     silhouette = []
     distances = []
     for i in range(2,10):

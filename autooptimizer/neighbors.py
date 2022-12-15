@@ -6,7 +6,7 @@ warnings.simplefilter('ignore')
 
 def kneighborsclassifier(x,y, scoring='roc_auc_ovo'):
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=2, shuffle=True)
-    parameters = {'n_neighbors':range(1, 20),
+    parameters = {'n_neighbors':range(1, 15),
                 'weights':['uniform', 'distance'],
                 'algorithm':['auto', 'ball_tree', 'kd_tree', 'brute'],
                 'metric':['minkowski','manhattan','euclidean']}
@@ -20,14 +20,14 @@ def kneighborsclassifier(x,y, scoring='roc_auc_ovo'):
             best_params = np.append(best_params, scv_model.best_params_)
             best_score = np.append(best_score, scv_model.best_score_)
     best_index = np.argmax(best_score)
-    print('The best accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
+    print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index] * 100, 2)))
     hyperparameter =  best_params[best_index]
     return KNeighborsClassifier(weights=hyperparameter['weights'], n_neighbors=hyperparameter['n_neighbors'], 
                                 metric=hyperparameter['metric'], algorithm=hyperparameter['algorithm'])
 
-def kneighborsregressor(x, y, scoring='r2'):
+def kneighborsregressor(x, y, scoring='neg_mean_absolute_error'):
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=2, shuffle=True)
-    parameters = {'n_neighbors':range(1,20), 'weights':['uniform', 'distance'],
+    parameters = {'n_neighbors':range(1,15), 'weights':['uniform', 'distance'],
                  'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'], 'metric':['minkowski', 'manhattan', 'euclidean']}
     main_model = KNeighborsRegressor()
     best_params = np.array([])
@@ -38,8 +38,8 @@ def kneighborsregressor(x, y, scoring='r2'):
         if svc_model.best_score_ != 1.:
             best_params = np.append(best_params, svc_model.best_params_)
             best_score = np.append(best_score, svc_model.best_score_)
-        best_index = np.argmax(best_score)
-    print('The best accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
+    best_index = np.argmax(best_score)
+    print('The best possible accuracy in terms of {0} metric is {1}'.format(scoring, round(best_score[best_index], 4)))
     hyperparameter = best_params[best_index]
     return KNeighborsRegressor(weights=hyperparameter['weights'], n_neighbors=hyperparameter['n_neighbors'], 
                                 metric=hyperparameter['metric'], algorithm=hyperparameter['algorithm'])

@@ -34,13 +34,13 @@ def logisticregression(x, y, scoring='roc_auc_ovo'):
             best_params = np.append(best_params, models[i].best_params_)
             best_score = np.append(best_score, models[i].best_score_)
     best_index = np.argmax(best_score)
-    print('The best accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
+    print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
     hyperparameter =  best_params[best_index]
     return LogisticRegression(solver=hyperparameter['solver'] , random_state=hyperparameter['random_state'], 
                                 penalty=hyperparameter['penalty'], max_iter=hyperparameter['max_iter'],
                                 C=hyperparameter['C'])
 
-def linearregression(x, y, scoring='r2'):
+def linearregression(x, y, scoring='neg_mean_absolute_error'):
     parameters = {'fit_intercept':[True,False], 'normalize':[True, False]}
     main_model = LinearRegression()
     best_params = np.array([])
@@ -52,6 +52,6 @@ def linearregression(x, y, scoring='r2'):
             best_params = np.append(best_params, scv_model.best_params_)
             best_score = np.append(best_score, scv_model.best_score_)
     best_index = np.argmax(best_score)
-    print('The best accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
+    print('The best possible accuracy in terms of {0} metric is {1}'.format(scoring, round(best_score[best_index], 4)))
     hyperparameter = best_params[best_index]
     return LinearRegression(fit_intercept=hyperparameter['fit_intercept'], normalize=hyperparameter['normalize'])
