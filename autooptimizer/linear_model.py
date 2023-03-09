@@ -5,6 +5,11 @@ import warnings
 warnings.simplefilter('ignore')
 
 def logisticregression(x, y, scoring='roc_auc_ovo'):
+    def progress(cur, max):
+        p = round(100*cur/max)
+        banner = "Optimizing in Progress: ["+'|'*int(p/5)+" "*(20-int(p/5))+"] -- {0}%".format(float(p))
+        print(banner, end="\r")
+
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.3, random_state=4, shuffle=True)
     l0_parameters = {'penalty':['l1','l2','elasticnet', 'none'],
                 'C':[np.arange(0.1,10,0.1),1,10,100,1000],
@@ -33,25 +38,34 @@ def logisticregression(x, y, scoring='roc_auc_ovo'):
         if models[i].best_score_ !=1.:
             best_params = np.append(best_params, models[i].best_params_)
             best_score = np.append(best_score, models[i].best_score_)
+        progress(i,5)
     best_index = np.argmax(best_score)
+    print('Optimizing is completed')
     print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index]*100,2)))
     hyperparameter =  best_params[best_index]
-    return LogisticRegression(solver=hyperparameter['solver'] , random_state=hyperparameter['random_state'], 
+    return LogisticRegression(solver=hyperparameter['solver'], random_state=hyperparameter['random_state'], 
                                 penalty=hyperparameter['penalty'], max_iter=hyperparameter['max_iter'],
                                 C=hyperparameter['C'])
 
-def linearregression(x, y, scoring='neg_mean_absolute_error'):
+def linearregression(x, y, scoring='neg_mean_squared_error'):
+    def progress(cur, max):
+        p = round(100*cur/max)
+        banner = "Optimizing in Progress: ["+'|'*int(p/5)+" "*(20-int(p/5))+"] -- {0}%".format(float(p))
+        print(banner, end="\r")
+
     parameters = {'fit_intercept':[True,False], 'normalize':[True, False]}
     main_model = LinearRegression()
     best_params = np.array([])
     best_score = np.array([])
-    for cv in (4,11):
-        scv_model = RandomizedSearchCV(main_model, parameters, scoring=scoring , cv=cv)
+    for cv in (1,20):
+        scv_model = RandomizedSearchCV(main_model, parameters, scoring=scoring , cv=cv+1)
         scv_model.fit(x, y)
         if scv_model.best_score_ != 1.:
             best_params = np.append(best_params, scv_model.best_params_)
             best_score = np.append(best_score, scv_model.best_score_)
+        progress(cv,20)
     best_index = np.argmax(best_score)
-    print('The best possible accuracy in terms of {0} metric is {1}'.format(scoring, round(best_score[best_index], 4)))
+    print('Optimizing is completed')
+    print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index], 3)))
     hyperparameter = best_params[best_index]
     return LinearRegression(fit_intercept=hyperparameter['fit_intercept'], normalize=hyperparameter['normalize'])

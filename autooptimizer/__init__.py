@@ -1,6 +1,9 @@
+from .svm import svc
+from .svm import svr
 from .cluster import kmeans
 from .cluster import meanshift
 from .cluster import dbscan
+from .cluster import minibatchkmeans
 from .tree import decisiontreeclassifier
 from .tree import decisiontreeregressor
 from .neighbors import kneighborsclassifier
@@ -8,6 +11,7 @@ from .neighbors import kneighborsregressor
 from .linear_model import logisticregression
 from .linear_model import linearregression
 from .ensemble import randomforestclassifier
+from .ensemble import randomforestregressor
 from .ensemble import gradientboostingclassifier
 from .ensemble import gradientboostingregressor
 from .ensemble import adaboostclassifier
