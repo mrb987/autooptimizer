@@ -65,7 +65,7 @@ def svr(x, y , scoring='neg_mean_squared_error'):
         progress(cv,20)
     best_index = np.argmax(best_score)
     print('Optimizing is completed')
-    print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index], 3)))
+    print('The best possible accuracy in terms of {0} metric is {1}%'.format(scoring, round(best_score[best_index] * 100, 2)))
     hyperparameter =  best_params[best_index]
     return SVR(kernel=hyperparameter['kernel'], C=hyperparameter['C'], 
                 degree=hyperparameter['degree'], gamma=hyperparameter['gamma'],

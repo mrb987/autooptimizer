@@ -1,0 +1,17 @@
+LICENSE.txt
+README.txt
+setup.py
+autooptimizer/__init__.py
+autooptimizer/cluster.py
+autooptimizer/ensemble.py
+autooptimizer/linear_model.py
+autooptimizer/metrics.py
+autooptimizer/neighbors.py
+autooptimizer/outlier.py
+autooptimizer/svm.py
+autooptimizer/tree.py
+autooptimizer.egg-info/PKG-INFO
+autooptimizer.egg-info/SOURCES.txt
+autooptimizer.egg-info/dependency_links.txt
+autooptimizer.egg-info/requires.txt
+autooptimizer.egg-info/top_level.txt

@@ -1,3 +1,26 @@
+Metadata-Version: 2.1
+Name: autooptimizer
+Version: 0.8.9
+Summary: AutoOptimizer is a python package for optimize machine learning algorithms.
+Home-page: https://github.com/mrb987/autooptimizer
+Author: MohammadReza Barghi
+Author-email: info@genesiscube.ir
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Topic :: Communications :: Email
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+
 AutoOptimizer package provides tools for automatically optimizing machine learning models. 
 
 It uses Exhaustive Search Mechanism with Hyperparameter Tuning for optimizing machine learning models. 
@@ -50,3 +73,4 @@ Please share your good ideas with us. Thanks for contributing with the program.
 >>info@GenesisCube.ir
 
 >>www.GenesisCube.ir
+
